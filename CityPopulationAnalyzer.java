@@ -12,22 +12,27 @@ import java.io.IOException;
  * efficient searching using binary search.
  * 
  * YOUR TASK:
- * Complete the methods marked with TODO comments
+ * Complete the methods marked with todo comments
  */
 public class CityPopulationAnalyzer {
     
     private String[] cityNames;      // Array to store city names
+    @SuppressWarnings("unused")
     private double[] populations;    // Array to store populations
     private int count;               // Track how many cities we've read
+    @SuppressWarnings("unused")
     private static final int INITIAL_CAPACITY = 150; // Start with capacity for ~150 cities
     
     /**
      * Constructor - initializes the arrays
      */
     public CityPopulationAnalyzer() {
-        // TODO: Initialize cityNames array with INITIAL_CAPACITY
-        // TODO: Initialize populations array with INITIAL_CAPACITY
-        // TODO: Set count to 0
+        //Initialize cityNames array with INITIAL_CAPACITY
+        cityNames = new String [INITIAL_CAPACITY];
+        //Initialize populations array with INITIAL_CAPACITY
+        populations = new double [INITIAL_CAPACITY];
+        //Set count to 0
+        count = 0;
     }
     
     /**
@@ -44,11 +49,21 @@ public class CityPopulationAnalyzer {
      * @throws IOException, InputMismatchException if the file cannot be found or read
      */
     public void readAndSortData(String filename)  {
-        // TODO: Create a File object with the filename
-        // TODO: Create a Scanner to read from the file
-        
-        // TODO: Read pairs of city name and population
+        //Create a File object with the filename
+        File f = new File(filename);
+        //Create a Scanner to read from the file
+        Scanner s = new Scanner(f);
+        // Read pairs of city name and population
         // HINT: Use a while loop with scanner.hasNextLine()
+        while (s.hasNextLine()) {
+            String city = s.nextLine();
+            double pop = -1;
+            if (s.hasNextLine()) {
+                pop = s.nextDouble();
+            }
+            System.out.println(city + ":" + pop);
+        }
+        
         // HINT: Read city name first, then check if there's a population line
         // HINT: Parse the population as a double (use Double.parseDouble())
         // HINT: Call insertSorted() for each city/population pair
@@ -66,6 +81,7 @@ public class CityPopulationAnalyzer {
      * @param cityName the name of the city
      * @param population the population of the city
      */
+    @SuppressWarnings("unused")
     private void insertSorted(String cityName, double population) {
         // TODO: Find the correct position for insertion
         // HINT: Start at 0 and go to count - why count?
@@ -84,6 +100,7 @@ public class CityPopulationAnalyzer {
     /**
      * Doubles the size of the arrays when they get full
      */
+    @SuppressWarnings("unused")
     private void resizeArrays() {
         // TODO: Create new arrays twice the current size
         
@@ -108,40 +125,59 @@ public class CityPopulationAnalyzer {
      * Returns the number of cities loaded
      */
     public int getCount() {
-        //TODO
-        return -1;
+        return cityNames.length;
     }
 
     /**
      * Returns the largest population (arrays are sorted high to low)
      */
     public double getLargestPopulation() {
-        //TODO
-        return -1;
+        int x = 0;
+        for (int index = 0; index < array.length; index++) {
+            if (populations[index] > populations[x]) {
+                x = index;
+            }
+        }
+        return populations[x];
     }
 
     /**
      * Returns the city name with the largest population
      */
     public String getCityWithLargestPopulation() {
-        //TODO
-        return "";
+        int x = 0;
+        for (int index = 0; index < array.length; index++) {
+            if (populations[index] > populations[x]) {
+                x = index;
+            }
+        }
+        return cityNames[x];
     }
 
     /**
      * Returns the smallest population (arrays are sorted high to low)
      */
     public double getSmallestPopulation() {
-        //TODO
-        return -1;
+        int x = 0;
+        for (int index = 0; index < array.length; index++) {
+            if (populations[index] < populations[x]) {
+                x = index;
+            }
+        }
+        return populations[x];
     }
 
     /**
      * Returns the city name with the smallest population
      */
     public String getCityWithSmallestPopulation() {
-        //TODO
-        return "";
+        int x = 0;
+        for (int index = 0; index < array.length; index++) {
+            if (populations[index] < populations[x]) {
+                x = index;
+            }
+        }
+        return cityNames[x];
     }
 
     /**
@@ -161,7 +197,7 @@ public class CityPopulationAnalyzer {
      * @return true if found, false otherwise
      */
     public boolean containsCityName(String cityName) {
-        // TODO
+        //TODO
         return false;
     }
 
@@ -170,8 +206,13 @@ public class CityPopulationAnalyzer {
      * @return average population, or 0 if no cities
      */
     public double averagePopulationSize() {
-        // TODO
-        return 0;
+        int i = 0;
+        double x = 0.0;
+        for (double d : populations) {
+            i ++;
+            x = x+d;
+        }
+        return d/i;
     }
     
     

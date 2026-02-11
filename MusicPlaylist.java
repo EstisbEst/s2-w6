@@ -32,30 +32,47 @@ public class MusicPlaylist {
     
     // Double the size of the array when it gets full
     private void resizeArray() {
-        // TODO: Implement resize
         // 1. Create a new array twice the size of the current one
         // 2. Copy all songs from the old array to the new array
         // 3. Update the songs reference to point to the new array
+        if (count*0.8 > songs.length) {
+            String[] temp = new String[songs.length*2];
+            for (int i = 0; i < temp.length; i++) {
+                temp[i] = songs[i];
+            }
+            songs = temp;
+        }
     }
     
     // INSERT song at specific position
     // Example: Insert "Bohemian Rhapsody" at position 2
     // Shifts all songs after position 2 to the right
     public void insertSong(int position, String title) {
-        // TODO: Implement insert
-        // 1. Check if there's room in the array (if not, call resizeArray())
-        // 2. Shift all songs from position to the right
-        // 3. Place the new song at the position
-        // 4. Increment count
+        // Check if there's room in the array (if not, call resizeArray())
+        if (songs.length <= count) {
+            this.resizeArray();
+        }
+        // Shift all songs from position to the right
+        for (int index = count; index > position; index--) {
+            songs[index] = songs[index-1];
+        }
+        // Place the new song at the position
+        songs[position] = title;
+        // Increment count
+        count++;
     }
     
     // REMOVE song at specific position
     // Example: Remove song at position 3
     // Shifts all songs after position 3 to the left
     public void removeSong(int position) {
-        // TODO: Implement remove
+        // Implement remove
         // 1. Shift all songs after position to the left
         // 2. Decrement count
+        for (int i = position; i < count - 1; i++) {
+            songs[i] = songs[i+1];
+        }
+        count --;
     }
     
     // Display all songs
