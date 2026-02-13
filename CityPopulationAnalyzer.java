@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputMismatchException;
 import java.util.Scanner;
 import java.util.Arrays;
-import java.io.IOException;
+import java.io.IOException;//mandatory
 
 /**
  * CityPopulationAnalyzer
@@ -48,7 +49,8 @@ public class CityPopulationAnalyzer {
      * @param filename the path to the data file
      * @throws IOException, InputMismatchException if the file cannot be found or read
      */
-    public void readAndSortData(String filename)  {
+    public void readAndSortData(String filename) throws IOException, InputMismatchException {
+        
         //Create a File object with the filename
         File f = new File(filename);
         //Create a Scanner to read from the file
@@ -87,14 +89,22 @@ public class CityPopulationAnalyzer {
         // HINT: Start at 0 and go to count - why count?
         // HINT: Loop through existing elements to find where this population should go
         // HINT: We want highest populations first, so insert before any smaller population
-        
+        int x = 0;
+        for (int index = 0; index < getCount(); index++) {
+            if (populations[index] < population) {
+                x = index;
+            }
+        }
         // TODO: Shift elements to the right to make room
         // HINT: Start from 0 and move to correct position
         // HINT: Move both cityNames and populations arrays
-        
+        for (int index = getCount(); index > x; index--) {
+            cityNames[index] = cityNames[index-1];
+        }
+        cityNames[x] = cityName;
+        populations [x] = population;
         // TODO: Insert the new city and population at the correct position
         
-        // TODO: Increment count
     }
     
     /**
@@ -133,7 +143,7 @@ public class CityPopulationAnalyzer {
      */
     public double getLargestPopulation() {
         int x = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < populations.length; index++) {
             if (populations[index] > populations[x]) {
                 x = index;
             }
@@ -146,7 +156,7 @@ public class CityPopulationAnalyzer {
      */
     public String getCityWithLargestPopulation() {
         int x = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < populations.length; index++) {
             if (populations[index] > populations[x]) {
                 x = index;
             }
@@ -159,7 +169,7 @@ public class CityPopulationAnalyzer {
      */
     public double getSmallestPopulation() {
         int x = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < populations.length; index++) {
             if (populations[index] < populations[x]) {
                 x = index;
             }
@@ -172,7 +182,7 @@ public class CityPopulationAnalyzer {
      */
     public String getCityWithSmallestPopulation() {
         int x = 0;
-        for (int index = 0; index < array.length; index++) {
+        for (int index = 0; index < populations.length; index++) {
             if (populations[index] < populations[x]) {
                 x = index;
             }
@@ -186,7 +196,11 @@ public class CityPopulationAnalyzer {
      * @return the population if found, or -1 if not found
      */
     public double findPopulationOfCity(String cityName) {
-        // TODO
+        for (int index = 0; index < getCount(); index++) {
+            if (condition) {
+                
+            }
+        }
         return -1;
     }
 
@@ -212,7 +226,7 @@ public class CityPopulationAnalyzer {
             i ++;
             x = x+d;
         }
-        return d/i;
+        return x/i;
     }
     
     
